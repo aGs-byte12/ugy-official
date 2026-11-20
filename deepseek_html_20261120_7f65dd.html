@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Студентам ЮГУ — Югорский государственный университет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0b1120;
+    --bg2: #0f172a;
+    --bg3: #16203a;
+    --card: #131d33;
+    --blue: #1e4fd8;
+    --blue-2: #4f7df3;
+    --cyan: #22d3ee;
+    --gold: #f0b429;
+    --text: #eef2f9;
+    --muted: #94a3b8;
+    --border: rgba(79, 125, 243, .18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--blue-2); color: #fff; }
+
+  h1, h2, h3, .display { font-family: 'Unbounded', 'Manrope', sans-serif; }
+
+  /* ===== NAVBAR ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px clamp(20px, 5vw, 64px);
+    background: rgba(11, 17, 32, .78);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(79, 125, 243, .14);
+    transition: background .3s;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .logo-mark {
+    width: 38px; height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    font-family: 'Unbounded', sans-serif;
+    font-size: .8rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(30, 79, 216, .45);
+    flex-shrink: 0;
+  }
+
+  .logo small {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: .62rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .84rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .25s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue-2), var(--cyan));
+    transition: width .3s ease;
+  }
+
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .btn-nav {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue), #163db0);
+    color: #fff;
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 6px 20px rgba(30, 79, 216, .35);
+    white-space: nowrap;
+  }
+
+  .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30, 79, 216, .5); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 130px 24px 90px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(30, 79, 216, .35), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 12% 85%, rgba(34, 211, 238, .14), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 88% 80%, rgba(240, 180, 41, .08), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 760px; height: 760px;
+    top: 50%; left: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(79, 125, 243, .18) 50deg,
+      transparent 100deg,
+      transparent 190deg,
+      rgba(34, 211, 238, .14) 240deg,
+      transparent 290deg
+    );
+    mask: radial-gradient(circle, transparent 60%, #000 61%, #000 63%, transparent 64%);
+    -webkit-mask: radial-gradient(circle, transparent 60%, #000 61%, #000 63%, transparent 64%);
+    animation: spin 50s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes spin { to { rotate: 360deg; } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    padding: 8px 18px;
+    border: 1px solid rgba(34, 211, 238, .3);
+    border-radius: 999px;
+    margin-bottom: 30px;
+    background: rgba(34, 211, 238, .06);
+    animation: fadeUp .9s .1s both;
+  }
+
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6.5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    background: linear-gradient(180deg, #fff 20%, #b9cdf7 60%, var(--blue-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 6px 40px rgba(30, 79, 216, .3));
+    animation: fadeUp .9s .25s both;
+  }
+
+  .hero p.lead {
+    max-width: 600px;
+    margin: 26px auto 42px;
+    color: var(--muted);
+    font-size: clamp(.95rem, 2vw, 1.08rem);
+    font-weight: 400;
+    animation: fadeUp .9s .4s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp .9s .55s both;
+  }
+
+  .btn-primary, .btn-ghost {
+    padding: 15px 38px;
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    transition: transform .25s, box-shadow .25s, background .25s, color .25s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), #163db0);
+    color: #fff;
+    border: none;
+    box-shadow: 0 12px 34px rgba(30, 79, 216, .4);
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(30, 79, 216, .55); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(238, 242, 249, .22);
+  }
+
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-3px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; translate: 0 30px; }
+    to   { opacity: 1; translate: 0 0; }
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: clamp(70px, 9vw, 120px) clamp(20px, 5vw, 64px); }
+
+  .section-head { max-width: 1200px; margin: 0 auto 52px; text-align: center; }
+
+  .section-head .kicker {
+    display: block;
+    font-size: .7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .section-head h2 span {
+    background: linear-gradient(90deg, var(--blue-2), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .divider {
+    width: 64px; height: 3px;
+    margin: 22px auto 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--blue-2), var(--cyan));
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    background:
+      linear-gradient(rgba(11, 17, 32, .92), rgba(11, 17, 32, .92)),
+      repeating-linear-gradient(45deg, #111b30 0 14px, #0d1526 14px 28px);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: clamp(50px, 7vw, 80px) clamp(20px, 5vw, 64px);
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 36px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(180deg, #fff, var(--blue-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    margin-top: 10px;
+    font-size: .72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* ===== SCHOOLS ===== */
+  .schools-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .school-card {
+    position: relative;
+    padding: 28px 24px;
+    background: linear-gradient(165deg, var(--card), var(--bg2));
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform .35s, border-color .35s, box-shadow .35s;
+  }
+
+  .school-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .35s;
+    background: radial-gradient(circle at 30% 0%, rgba(79, 125, 243, .14), transparent 70%);
+  }
+
+  .school-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .5);
+  }
+
+  .school-card:hover::before { opacity: 1; }
+
+  .school-icon {
+    position: relative;
+    width: 46px; height: 46px;
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+    border-radius: 12px;
+    background: rgba(79, 125, 243, .12);
+    border: 1px solid rgba(79, 125, 243, .25);
+    margin-bottom: 18px;
+  }
+
+  .school-card h3 {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+
+  .school-card p {
+    position: relative;
+    font-size: .84rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ===== LIFE / TABS ===== */
+  .life-wrap { max-width: 1100px; margin: 0 auto; }
+
+  .tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 38px;
+  }
+
+  .tab-btn {
+    padding: 11px 24px;
+    background: transparent;
+    border: 1px solid rgba(238, 242, 249, .14);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .25s;
+  }
+
+  .tab-btn:hover { color: #fff; border-color: rgba(79, 125, 243, .5); }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--blue), #163db0);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(30, 79, 216, .35);
+  }
+
+  .tab-panel {
+    display: none;
+    padding: 36px clamp(22px, 4vw, 44px);
+    background: linear-gradient(165deg, var(--card), var(--bg2));
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 16px;
+    animation: fadeUp .45s ease both;
+  }
+
+  .tab-panel.active { display: block; }
+
+  .tab-panel h3 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .tab-panel p {
+    color: var(--muted);
+    font-size: .94rem;
+    margin-bottom: 18px;
+  }
+
+  .list-clean { list-style: none; display: grid; gap: 12px; }
+
+  .list-clean li {
+    position: relative;
+    padding-left: 26px;
+    color: #cbd5e1;
+    font-size: .92rem;
+  }
+
+  .list-clean li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 8px; height: 8px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, var(--blue-2), var(--cyan));
+  }
+
+  /* ===== CONTACTS ===== */
+  .contacts-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .contact-card {
+    padding: 30px 26px;
+    background: linear-gradient(165deg, var(--card), var(--bg2));
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px;
+    transition: transform .3s, border-color .3s;
+  }
+
+  .contact-card:hover { transform: translateY(-4px); border-color: var(--border); }
+
+  .contact-card .ico { font-size: 1.6rem; display: block; margin-bottom: 16px; }
+
+  .contact-card h4 {
+    font-size: .95rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .contact-card p, .contact-card a {
+    font-size: .87rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .25s;
+  }
+
+  .contact-card a:hover { color: var(--cyan); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 48px clamp(20px, 5vw, 64px);
+    border-top: 1px solid rgba(255,255,255,.06);
+    text-align: center;
+    background: #080d18;
+  }
+
+  footer .logo { justify-content: center; margin-bottom: 18px; }
+
+  footer p {
+    font-size: .78rem;
+    color: #5c687d;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  footer p + p { margin-top: 8px; }
+
+  /* ===== REVEAL ===== */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .hero::before { width: 520px; height: 520px; }
+  }
+
+  @media (max-width: 480px) {
+    .logo { font-size: .85rem; }
+    .logo small { display: none; }
+    .btn-nav { padding: 9px 16px; font-size: .72rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions a { text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">ЮГУ</span>
+      <span>Югорский&nbsp;государственный<small>Студенческий портал</small></span>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#schools">Институты</a></li>
+        <li><a href="#life">Студенческая жизнь</a></li>
+        <li><a href="#stats">Цифры</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn-nav" onclick="document.getElementById('schools').scrollIntoView()">Личный кабинет</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow"><span class="dot"></span>Ханты-Мансийск · Югра</span>
+      <h1>Югорский государственный университет</h1>
+      <p class="lead">
+        Всё для студентов ЮГУ в одном месте: институты и направления, общежития,
+        стипендии, студенческие организации и события. Учись, развивайся и находи своё сообщество.
+      </p>
+      <div class="hero-actions">
+        <a href="#schools" class="btn-primary">Выбрать институт</a>
+        <a href="#life" class="btn-ghost">Студенческая жизнь</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" id="stats">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-num" data-count="10">0</div>
+        <div class="stat-label">Высших школ</div>
+      </div>
+      <div>
+        <div class="stat-num" data-count="119">0</div>
+        <div class="stat-label">Образовательных программ</div>
+      </div>
+      <div>
+        <div class="stat-num" data-count="10000" data-suffix="+">0</div>
+        <div class="stat-label">Студентов</div>
+      </div>
+      <div>
+        <div class="stat-num" data-count="4">0</div>
+        <div class="stat-label">Филиала</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHOOLS -->
+  <section id="schools">
+    <div class="section-head reveal">
+      <span class="kicker">Образование</span>
+      <h2>Высшие школы <span>и институты</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="schools-grid">
+
+      <article class="school-card reveal">
+        <div class="school-icon">⛽</div>
+        <h3>Высшая нефтяная школа</h3>
+        <p>Нефтегазовое дело, химия, геология. Подготовка инженеров для топливно-энергетического комплекса Югры.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">⚡</div>
+        <h3>Высшая школа энергетики и инжиниринга</h3>
+        <p>Электроэнергетика, электротехника, инжиниринг. Современные лаборатории и проектное обучение.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">💻</div>
+        <h3>Информационная школа цифровых технологий</h3>
+        <p>Информатизация, автоматизация, AR и VR. Программирование, data science и цифровые сервисы.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">📊</div>
+        <h3>Высшая школа права</h3>
+        <p>Экономика, менеджмент, управление персоналом, экономическая безопасность.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">🌿</div>
+        <h3>Высшая экологическая школа</h3>
+        <p>Экология, природопользование, техносферная безопасность. Карбоновые полигоны и мегагранты.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">📚</div>
+        <h3>Высшая школа гуманитарных наук</h3>
+        <p>Педагогика, психология, лингвистика, юриспруденция. Гуманитарный институт североведения.</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">🏗️</div>
+        <h3>Политехническая школа</h3>
+        <p>Строительство, техносферная безопасность, прикладная геология. Проект «Профессионалитет».</p>
+      </article>
+
+      <article class="school-card reveal">
+        <div class="school-icon">🎓</div>
+        <h3>Многопрофильный колледж</h3>
+        <p>Программы среднего профессионального образования — от IT до нефтегазовой отрасли.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- LIFE -->
+  <section id="life">
+    <div class="section-head reveal">
+      <span class="kicker">Студенческая жизнь</span>
+      <h2>Больше, чем <span>учёба</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="life-wrap">
+      <div class="tabs reveal">
+        <button class="tab-btn active" data-tab="dorm">🏠 Общежития</button>
+        <button class="tab-btn" data-tab="stip">💰 Стипендии</button>
+        <button class="tab-btn" data-tab="orgs">🎯 Организации</button>
+        <button class="tab-btn" data-tab="events">📅 Мероприятия</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="dorm">
+        <h3>Комфортное проживание</h3>
+        <p>Студенческий городок ЮГУ — это несколько общежитий в шаговой доступности от учебных корпусов. По отзывам студентов, заселение проходит быстро, а условия — комфортные.</p>
+        <ul class="list-clean">
+          <li>Общежития коридорного и секционного типа</li>
+          <li>Активные студенты могут претендовать на комнаты повышенной комфортности</li>
+          <li>Паспортист и администрация — на первом этаже общежития №1</li>
+          <li>Участие в общественной деятельности студгородка учитывается при распределении</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" data-panel="stip">
+        <h3>Стипендии и меры поддержки</h3>
+        <p>В ЮГУ действует развитая система стипендиального обеспечения — от академических до именных стипендий федерального и регионального уровня.</p>
+        <ul class="list-clean">
+          <li>16 стипендий Правительства РФ</li>
+          <li>4 стипендии Президента РФ</li>
+          <li>29 стипендий Губернатора ХМАО-Югры</li>
+          <li>Повышенные стипендии за достижения в учёбе, науке, спорте и общественной жизни</li>
+          <li>Стипендия учёного совета университета</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" data-panel="orgs">
+        <h3>Студенческие объединения</h3>
+        <p>Найти единомышленников легко: в ЮГУ работают десятки клубов, отрядов и творческих коллективов.</p>
+        <ul class="list-clean">
+          <li>Штаб студенческих отрядов ЮГУ</li>
+          <li>Студенческий клуб Smart Lean Group и лин-лаборатория</li>
+          <li>Yugra Word Wizards (YWW) — серия образовательных мероприятий</li>
+          <li>ССК «Север» — спортивный клуб университета</li>
+          <li>Школа вожатых и студенческий ЛинКлуб</li>
+          <li>Волонтёрские и добровольческие объединения</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" data-panel="events">
+        <h3>События и активности</h3>
+        <p>Учебный год в ЮГУ насыщен мероприятиями: от научных конференций до творческих фестивалей и спортивных турниров.</p>
+        <ul class="list-clean">
+          <li>Пикник «7Я ЮГУ» — традиционный студенческий праздник</li>
+          <li>Школа КВН и творческие конкурсы</li>
+          <li>Региональные турниры по волейболу и другим видам спорта</li>
+          <li>Серия тренингов «Startup Guide» — от идеи до презентации</li>
+          <li>Конкурсы профессионального мастерства</li>
+          <li>Научные конференции и школы для молодых исследователей</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts">
+    <div class="section-head reveal">
+      <span class="kicker">Связь</span>
+      <h2>Полезные <span>контакты</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="contacts-grid">
+      <article class="contact-card reveal">
+        <span class="ico">🌐</span>
+        <h4>Официальный сайт</h4>
+        <p><a href="https://www.ugrasu.ru" target="_blank" rel="noopener">ugrasu.ru</a></p>
+      </article>
+
+      <article class="contact-card reveal">
+        <span class="ico">✉️</span>
+        <h4>Электронная почта</h4>
+        <p><a href="mailto:ugrasu@ugrasu.ru">ugrasu@ugrasu.ru</a></p>
+      </article>
+
+      <article class="contact-card reveal">
+        <span class="ico">📞</span>
+        <h4>Телефон</h4>
+        <p><a href="tel:+73467377000">+7 (3467) 377-000</a></p>
+      </article>
+
+      <article class="contact-card reveal">
+        <span class="ico">📍</span>
+        <h4>Адрес</h4>
+        <p>г. Ханты-Мансийск, ул. Чехова, 16</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">
+      <span class="logo-mark">ЮГУ</span>
+      <span>Югорский государственный университет</span>
+    </div>
+    <p>Студенческий портал. Неофициальный информационный ресурс. Официальные документы и расписание — на сайте ugrasu.ru.</p>
+    <p>© 2026 · Сделано для студентов ЮГУ</p>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const $  = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  /* ---------- Вкладки «Студенческая жизнь» ---------- */
+  const tabButtons = $$('.tab-btn');
+  const tabPanels  = $$('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.tab;
+      tabPanels.forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.panel === target);
+      });
+    });
+  });
+
+  /* ---------- Появление при скролле + счётчики ---------- */
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    $$('.reveal').forEach(el => revealObserver.observe(el));
+
+    const animateCounter = (el) => {
+      const target = parseInt(el.dataset.count, 10) || 0;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        el.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    $$('[data-count]').forEach(el => counterObserver.observe(el));
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('visible'));
+    $$('[data-count]').forEach(el => {
+      el.textContent = el.dataset.count + (el.dataset.suffix || '');
+    });
+  }
+
+  /* ---------- Фон навбара при скролле ---------- */
+  const nav = $('.nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 40
+        ? 'rgba(11, 17, 32, .96)'
+        : 'rgba(11, 17, 32, .78)';
+    }, { passive: true });
+  }
+})();
+</script>
+
+</body>
+</html>
